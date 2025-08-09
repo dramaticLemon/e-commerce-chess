@@ -1,0 +1,27 @@
+package com.join.tab.controller;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.join.tab.exception.DuplicateFieldException;
+import com.join.tab.services.admin.AdminCategoryService;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+	private final AdminCategoryService adminCategoryService;
+
+    public GlobalExceptionHandler(AdminCategoryService adminCategoryService) {
+        this.adminCategoryService = adminCategoryService;
+    }
+
+	@ExceptionHandler(DuplicateFieldException.class)
+	public String handleDuplicateFieldException(DuplicateFieldException ex, Model model) {
+		model.addAttribute("error", ex.getMessage());
+		model.addAttribute("categories", adminCategoryService.getAllCategory());
+		model.addAttribute("content", "admin/category");
+		return "admin/base";
+	}
+
+}

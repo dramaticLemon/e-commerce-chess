@@ -1,0 +1,102 @@
+<div th:fragment="content">
+<div class="container mt-4">
+    <h1>Category management</h1>
+    
+    <!-- Form added new catogory -->
+    <div class="card mb-4">
+        <div class="card-header">Added new category</div>
+        <div class="card-body">
+            <form action="/admin/category" method="POST">
+                <div class="mb-3">
+                    <input type="text" name="name" placeholder="Enter name" required />
+                    <input type="text" name="code" placeholder="Enter code" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+                <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- List category -->
+    <div class="card">
+        <div class="card-header">List category</div>
+        <div class="card-body">
+
+           <table class="table table-bordered" id="categoriesTable">
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Code</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <div th:if="${deleteMessage}" class="alert alert-success" th:text="${deleteMessage}"></div>
+              <tbody>
+                  <tr th:each="category : ${categories}">
+                      <td th:text="${category.id}"></td>
+                      <td th:text="${category.name}"></td>
+                      <td th:text="${category.code}"></td>
+                      <td>
+                        <button class="btn btn-sm btn-warning btn-edit">Edit</button>
+                        <form th:action="@{/admin/category/delete/{id}(id=${category.id})}" method="post" style="display:inline">
+                          <button type="submit" class="btn btn-sm btn-danger btn-delete">Delete</button>
+                        </form>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+
+        </div>
+    </div>
+      <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="editCategoryForm" th:action="@{/admin/category/update}" method="post" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editCategoryLabel">Редактор категории</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" name="id" id="editCategoryId" />
+            <div class="mb-3">
+                <label for="editCategoryName" class="form-label">Category name</label>
+                <input type="text" name="name" class="form-control" id="editCategoryName" required />
+            </div>
+            <div class="mb-3">
+                <label for="editCategoryCode" class="form-label">Category code</label>
+                <input type="text" name="code" class="form-control" id="editCategoryCode" required />
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rollback</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+</div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const editModal = new bootstrap.Modal(document.getElementById('editCategoryModal'));
+    const categoriesTable = document.getElementById('categoriesTable');
+
+    categoriesTable.addEventListener('click', (e) => {
+      if (e.target.classList.contains('btn-edit')) {
+        const row = e.target.closest('tr');
+        const id = row.children[0].textContent.trim();
+        const name = row.children[1].textContent.trim();
+        const code = row.children[2].textContent.trim();
+
+        document.getElementById('editCategoryId').value = id;
+        document.getElementById('editCategoryName').value = name;
+        document.getElementById('editCategoryCode').value = code;
+
+        const editModal = new bootstrap.Modal(document.getElementById('editCategoryModal'));
+
+        editModal.show();
+      }
+    });
+  });
+</script>
+</div>

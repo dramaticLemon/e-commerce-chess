@@ -1,0 +1,37 @@
+services:
+  webapp:
+    build: .
+    ports:
+      - "8080:8080"
+    container_name: tomcat-container
+    depends_on:
+      - postgres-app
+    environment:
+      - JDBC_URL=jdbc:postgresql://postgres-app:5432/e-commerce-database
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - SPRING_PROFILES_ACTIVE=DEV
+    networks:
+      - my-app-network
+
+  postgres-app:
+    image: postgres:13
+    container_name: postgres-container
+    environment:
+      - POSTGRES_DB=e-commerce-database
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - my-app-network
+
+
+volumes:
+  postgres-data:
+
+networks:
+  my-app-network:
+    driver: bridge

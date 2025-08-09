@@ -28,7 +28,7 @@ public class Category {
 
 	@NotBlank(message = "Name must not be blank")
 	@Size(max = 255, message = "Value '${validatedValue}' must be at most 255 characters")
-	@Column(name = "category_name", nullable = false)
+	@Column(name = "category_name", nullable = false, unique=true)
     private String name;
 
 	@NotBlank(message = "Code must not be blank")
