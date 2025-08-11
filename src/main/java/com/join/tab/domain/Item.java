@@ -29,10 +29,10 @@ public class Item {
 
 	@NotBlank(message="Name must not be blank")
 	@Size(max=255, message="Name must be at most 255 characters")
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, unique=true)
 	private String name;
 
-	@NotBlank(message="Name must not be null")
+	@NotNull(message="Name must not be null")
 	@DecimalMin(value="0.0", inclusive=false, message="Price must be greater then 0")
 	@Column(name = "price", nullable = false)
 	private BigDecimal price;
@@ -94,7 +94,7 @@ public class Item {
 		return this.price;
 	}
 
-	public void setCurrentPrice(BigDecimal price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

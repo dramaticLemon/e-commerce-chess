@@ -1,4 +1,4 @@
-package com.join.tab.repository.admin;
+package com.join.tab.repository;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
 @Repository
-public class AdminCotegoryRepository {
+public class CotegoryRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;

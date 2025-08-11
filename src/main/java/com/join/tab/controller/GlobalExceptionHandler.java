@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.join.tab.exception.DuplicateFieldException;
+import com.join.tab.exception.DuplicateItemNameException;
 import com.join.tab.services.admin.AdminCategoryService;
 
 @ControllerAdvice
@@ -23,5 +24,13 @@ public class GlobalExceptionHandler {
 		model.addAttribute("content", "admin/category");
 		return "admin/base";
 	}
+
+	@ExceptionHandler(DuplicateItemNameException.class) // Пример нового исключения для товара
+    public String handleItemCreationException(DuplicateItemNameException ex, Model model) {
+        model.addAttribute("error", ex.getMessage());
+        model.addAttribute("categories", adminCategoryService.getAllCategory());
+        model.addAttribute("content", "admin/items");
+        return "admin/base";
+    }
 
 }

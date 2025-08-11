@@ -1,0 +1,136 @@
+<div th:fragment="content">
+	<div class="container mt-4">
+		<h1>Item management</h1>
+
+		<!-- Form added new item -->
+		<div class="card mb-4">
+			<div class="card-header">Add New Item</div>
+			<div class="card-body">
+				<form th:action="@{/admin/items/create}" method="post">
+					<div class="mb-3">
+						<label for="name" class="form-label">Name</label>
+						<input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required>
+					</div>
+					<div class="mb-3">
+						<label for="price" class="form-label">Price</label>
+						<input type="number" class="form-control" id="price" name="price" placeholder="Enter price"
+							required>
+					</div>
+					<div class="mb-3">
+						<label for="category" class="form-label">Category</label>
+						<select class="form-select" id="category" name="category" required>
+							<option value="" disabled selected>Select category</option>
+							<option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary">Add Item</button>
+					<div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
+				</form>
+			</div>
+		</div>
+
+		<!-- List category -->
+		<div class="card">
+			<div class="card-header">List Items</div>
+			<div class="card-body">
+
+				<table class="table table-bordered" id="itemsTable">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Category</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<div th:if="${deleteMessage}" class="alert alert-success" th:text="${deleteMessage}"></div>
+					<tbody>
+						<tr th:each="item : ${items}">
+							<td th:text="${item.id}"></td>
+							<td th:text="${item.name}"></td>
+							<td th:text="${item.price}"></td>
+							<td>
+								<span th:text="${item.category.getName()}"></span>
+								<span th:text="${item.category.getId()}" style="display:none;" class="category-id"></span>
+							</td>
+							<td>
+								<button class="btn btn-sm btn-warning btn-edit">Edit</button>
+								<form th:action="@{/admin/item/delete/{id}(id=${item.id})}" method="post" style="display:inline">
+									<button type="submit" class="btn btn-sm btn-danger btn-delete">Delete</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+		<div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<form id="edititemForm" th:action="@{/admin/item/update}" method="post" class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="editItemLabel">Item category</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" name="id" id="editItemId" />
+
+						<div class="mb-3">
+							<label for="editCategoryName" class="form-label">Item name</label>
+							<input type="text" name="name" class="form-control" id="editItemName" required />
+						</div>
+
+						<div class="mb-3">
+							<label for="editItemCode" class="form-label">Item price</label>
+							<input type="number" name="price" class="form-control" id="editItemPrice" required />
+						</div>
+
+						<div class="mb-3">
+							<label for="editItemCategory" class="form-label">Item category</label>
+							<select class="form-select" id="editItemCategory" name="category" required>
+								<option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+							</select>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rollback</button>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const editModal = new bootstrap.Modal(document.getElementById('editItemModal'));
+			const itemsTable = document.getElementById('itemsTable');
+
+			itemsTable.addEventListener('click', (e) => {
+				if (e.target.classList.contains('btn-edit')) {
+					const row = e.target.closest('tr');
+					
+					const id = row.children[0].textContent.trim();
+					const name = row.children[1].textContent.trim();
+					const price = row.children[2].textContent.trim();
+					const categoryId = row.querySelector('.category-id').textContent.trim();
+
+
+					document.getElementById('editItemId').value = id;
+					document.getElementById('editItemName').value = name;
+					document.getElementById('editItemPrice').value = price;
+					document.getElementById('editItemCategory').value = categoryId;
+					
+
+					const categorySelect = document.getElementById('editItemCategory');
+            		categorySelect.value = categoryId;
+
+					editModal.show();
+				}
+			});
+		});
+	</script>
+</div>

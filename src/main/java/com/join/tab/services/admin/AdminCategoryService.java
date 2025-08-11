@@ -11,21 +11,21 @@ import com.join.tab.domain.Item;
 import com.join.tab.dto.CategoryDto;
 import com.join.tab.dto.ItemDto;
 import com.join.tab.exception.DuplicateFieldException;
-import com.join.tab.repository.admin.AdminCotegoryRepository;
+import com.join.tab.repository.CotegoryRepository;
 
 @Service
 public class AdminCategoryService {
 	
-	private final AdminCotegoryRepository adminCotegoryRepository;
+	private final CotegoryRepository categoryRepository;
 
-	public AdminCategoryService(AdminCotegoryRepository adminCotegoryRepository) {
-		this.adminCotegoryRepository = adminCotegoryRepository;
+	public AdminCategoryService(CotegoryRepository categoryRepository) {
+		this.categoryRepository = categoryRepository;
 	}
 	
 	@Transactional
 	public void createCategory(CategoryDto categoryDto) {
 
-		if (adminCotegoryRepository.existsByNameOrCode(categoryDto.getName(), categoryDto.getCode())) {
+		if (categoryRepository.existsByNameOrCode(categoryDto.getName(), categoryDto.getCode())) {
         throw new DuplicateFieldException("Category name or code already exists");
     	}
 
@@ -48,13 +48,13 @@ public class AdminCategoryService {
 			);
 			
 		}
-		adminCotegoryRepository.save(category);
+		categoryRepository.save(category);
 		
 	}
 
 
 	public List<CategoryDto> getAllCategory() {
-		return adminCotegoryRepository.getAllCategory()
+		return categoryRepository.getAllCategory()
             .stream()
             .map(cat -> new CategoryDto(
 				cat.getId(),
@@ -67,13 +67,13 @@ public class AdminCategoryService {
 	}
 
 	public void delete(Long id) {
-		adminCotegoryRepository.deleteById(id);
+		categoryRepository.deleteById(id);
 	}
 
 	public void updateCategory(CategoryDto categoryDto) {
-		Category category = adminCotegoryRepository.getCategory(categoryDto.getId());
+		Category category = categoryRepository.getCategory(categoryDto.getId());
 		category.setName(categoryDto.getName());
-		adminCotegoryRepository.update(category);
+		categoryRepository.update(category);
 	}
 
 }
