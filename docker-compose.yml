@@ -6,10 +6,15 @@ services:
     container_name: tomcat-container
     depends_on:
       - postgres-app
+      - minio-app
     environment:
       - JDBC_URL=jdbc:postgresql://postgres-app:5432/e-commerce-database
       - DB_USER=postgres
       - DB_PASSWORD=postgres
+      - SPRING_PROFILES_ACTIVE=DEV
+      - MINIO_ENDPOINT=http://minio-app:9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin
       - SPRING_PROFILES_ACTIVE=DEV
     networks:
       - my-app-network
@@ -28,9 +33,25 @@ services:
     networks:
       - my-app-network
 
+  minio-app:
+    image: minio/minio
+    container_name: minio-container
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    environment:
+        - MINIO_ROOT_USER=minioadmin
+        - MINIO_ROOT_PASSWORD=minioadmin
+    command: server /data --console-address ":9001"
+    networks:
+        - my-app-network
+
 
 volumes:
   postgres-data:
+  minio-data:
 
 networks:
   my-app-network:

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Chess Store Online</title>
+    <link rel="stylesheet" href="style.css">
+	<style>
+		/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header (same as previous templates) */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.main-nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+}
+
+.main-nav .active {
+    color: #007BFF;
+}
+
+/* About Hero Section */
+.about-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1920x400') no-repeat center center/cover;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.about-hero-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.about-hero h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+.about-hero p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* Our Story Section */
+.about-story .container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 50px 20px;
+}
+
+.story-text {
+    flex: 1;
+}
+
+.story-image {
+    flex: 1;
+    text-align: center;
+}
+
+.story-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Mission Section */
+.mission {
+    background-color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.mission h2 {
+    margin-bottom: 40px;
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.mission-item h3 {
+    color: #007BFF;
+}
+
+/* Team Section */
+.team {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.team h2 {
+    margin-bottom: 40px;
+}
+
+.team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.team-member {
+    text-align: center;
+}
+
+.team-member img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.team-member h4 {
+    margin: 0;
+}
+
+/* Footer (same as previous templates) */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+	</style>
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="/" class="logo">Chess Store</a>
+        <nav class="main-nav">
+            <a href="/catalog">Catalog</a>
+            <a href="/about" class="active">About Us</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <div class="about-hero-content">
+                <h1>Our Story</h1>
+                <p>More than just a store, we are a community passionate about chess.</p>
+            </div>
+        </section>
+
+        <section class="about-story">
+            <div class="container">
+                <div class="story-image">
+                    <img src="https://via.placeholder.com/500" alt="An old chess board">
+                </div>
+                <div class="story-text">
+                    <h2>Our Journey</h2>
+                    <p>Founded in 2020 by a group of chess enthusiasts, our store began with a simple mission: to provide high-quality chess sets to players of all levels. From humble beginnings selling handmade wooden sets, we've grown to offer a curated selection of modern electronic boards, exclusive pieces, and educational resources. We believe chess is more than a game—it's a tool for strategic thinking and personal growth.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mission">
+            <div class="container">
+                <h2>Our Mission</h2>
+                <div class="mission-grid">
+                    <div class="mission-item">
+                        <h3>Quality Products</h3>
+                        <p>We handpick every item to ensure superior craftsmanship and durability for years of play.</p>
+                    </div>
+                    <div class="mission-item">
+                        <h3>Community Building</h3>
+                        <p>We are dedicated to creating a vibrant community that connects chess lovers from around the world.</p>
+                    </div>
+                    <div class="mission-item">
+                        <h3>Empowering Players</h3>
+                        <p>We provide the tools and resources you need to improve your skills and master the game.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team">
+            <div class="container">
+                <h2>Meet the Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/200" alt="Team member 1">
+                        <h4>Jane Doe</h4>
+                        <p>Founder & CEO</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/200" alt="Team member 2">
+                        <h4>John Smith</h4>
+                        <p>Head of Product</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Chess Store. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

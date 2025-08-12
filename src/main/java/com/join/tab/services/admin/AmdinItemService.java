@@ -80,7 +80,7 @@ public class AmdinItemService {
 		category.setId(itemFormDto.getCategory());
 		
 		item.setCaregory(category);
-		
+
 		itemRepository.update(item);
 	}
 }

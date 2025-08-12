@@ -91,6 +91,102 @@
   }
 }
 
+/* Секция с товарами */
+.products-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.product-grid {
+    display: grid;
+    /* Устанавливаем 3 колонки с равной шириной */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px; 
+    justify-content: center;
+}
+
+/* Добавьте это, чтобы сетка была адаптивной на маленьких экранах */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* Одна колонка на экранах до 768px */
+    }
+}
+/* Стиль для одной карточки */
+.product-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Стиль для изображения */
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Стиль для заголовка и цены */
+.product-card h4 {
+    font-size: 1.2em;
+    margin: 15px 0 5px;
+}
+
+.product-card .price {
+    font-size: 1.1em;
+    color: #007BFF;
+    font-weight: bold;
+    margin: 0 0 15px;
+}
+
+/* Стиль для кнопки */
+.btn-secondary {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    background-color: #f8f8f8;
+}
+
+
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон */
+    padding: 20px;                         /* Отступы внутри блока */
+    border-radius: 8px;                    /* Скругление углов */
+}
+
+.carousel-item {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Изменение цвета и добавление тени для заголовка */
+.carousel-caption h5 {
+    color: #ffc107; /* Ярко-жёлтый цвет */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Тень для лучшей читаемости */
+}
+
+/* Изменение цвета для параграфа */
+.carousel-caption p {
+    color: #f8f9fa; /* Светло-серый цвет */
+    font-size: 1.1em;
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
