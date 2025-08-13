@@ -12,6 +12,10 @@
 						<input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required>
 					</div>
 					<div class="mb-3">
+						<label for="quantity" class="form-label">Quantity</label>
+						<input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity" required>
+					</div>
+					<div class="mb-3">
 						<label for="price" class="form-label">Price</label>
 						<input type="number" class="form-control" id="price" name="price" placeholder="Enter price"
 							required>
@@ -45,6 +49,7 @@
 							<th>Name</th>
 							<th>Price</th>
 							<th>Category</th>
+							<th>Quantity</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -58,6 +63,7 @@
 								<span th:text="${item.category.getName()}"></span>
 								<span th:text="${item.category.getId()}" style="display:none;" class="category-id"></span>
 							</td>
+							<th th:text="${item.quantity}"></th>
 							<td>
 								<button class="btn btn-sm btn-warning btn-edit">Edit</button>
 								<form th:action="@{/admin/item/delete/{id}(id=${item.id})}" method="post" style="display:inline">
@@ -98,6 +104,11 @@
 							</select>
 						</div>
 
+						<div class="mb-3">
+							<label for="editItemQuantity" class="form-label">Item quantity</label>
+							<input type="number" name="quantity" class="form-control" id="editItemQuantity" required />
+						</div>
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rollback</button>
@@ -121,12 +132,14 @@
 					const name = row.children[1].textContent.trim();
 					const price = row.children[2].textContent.trim();
 					const categoryId = row.querySelector('.category-id').textContent.trim();
+					const quantity = row.children[4].textContent.trim();
 
 
 					document.getElementById('editItemId').value = id;
 					document.getElementById('editItemName').value = name;
 					document.getElementById('editItemPrice').value = price;
 					document.getElementById('editItemCategory').value = categoryId;
+					document.getElementById('editItemQuantity').value = quantity;
 					
 
 					const categorySelect = document.getElementById('editItemCategory');

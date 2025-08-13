@@ -11,29 +11,33 @@ public class ItemFormDto {
     private BigDecimal price;
     private Long category;
 	private MultipartFile file;
+	private int quantity;
 
 	public ItemFormDto() {
 	}
 
-	public ItemFormDto(String name, BigDecimal price, Long category) {
+	public ItemFormDto(String name, BigDecimal price, Long category, int quantity) {
 		this.name = name;
 		this.price = price;
 		this.category = category;
+		this.quantity = quantity;
 	}
 
-	public ItemFormDto(String name, BigDecimal price, Long category, Long id, MultipartFile file) {
+	public ItemFormDto(String name, BigDecimal price, Long category, Long id, MultipartFile file, int quantity) {
 		this.name = name;
 		this.price = price;
 		this.category = category;
 		this.id = id;
 		this.file = file;
+		this.quantity = quantity;
 	}
 
-	public ItemFormDto(String name, BigDecimal price, Long category, Long id) {
+	public ItemFormDto(String name, BigDecimal price, Long category, Long id, int quantity) {
 		this.name = name;
 		this.price = price;
 		this.category = category;
 		this.id = id;
+		this.quantity = quantity;
 	}
 	
 
@@ -71,6 +75,14 @@ public class ItemFormDto {
 
 	public void setFile(MultipartFile file) {
 		this.file = file;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 	

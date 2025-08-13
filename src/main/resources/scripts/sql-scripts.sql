@@ -1,3 +1,6 @@
+-- очистить всю базу данных
+drop table users, orders, order_item, items, databasechangeloglock, databasechangelog, categories cascade;
+
 select * from categories;
 insert into categories (created_at, update_at, category_code, category_name)
 values

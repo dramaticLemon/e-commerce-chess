@@ -43,7 +43,8 @@ public class AmdinItemService {
 				cat.getId(),
 				cat.getName(),
 				cat.getPrice(),
-				cat.getCategory()
+				cat.getCategory(),
+				cat.getQuantity()
 				)
 			).collect(Collectors.toList());
 	}
@@ -56,7 +57,6 @@ public class AmdinItemService {
     	}
 		InputStream inputStream = new BufferedInputStream(itemFormDto.getFile().getInputStream(), 3 * 1024 * 1024);
 
-
 		String fileUrl = minioService.uploadFile(inputStream, itemFormDto.getFile().getOriginalFilename());
 		Item item = new Item();
 		item.setName(itemFormDto.getName());
@@ -65,6 +65,7 @@ public class AmdinItemService {
 		category.setId(itemFormDto.getCategory());
 		item.setCaregory(category);
 		item.setFileUrl(fileUrl);
+		item.setQuantity(itemFormDto.getQuantity());
 
 		itemRepository.save(item);
 	}
@@ -87,6 +88,7 @@ public class AmdinItemService {
 		Item item = itemRepository.getItem(itemFormDto.getId());
 		item.setName(itemFormDto.getName());
 		item.setPrice(itemFormDto.getPrice());
+		item.setQuantity(itemFormDto.getQuantity());
 
 		Category category = new Category();
 		category.setId(itemFormDto.getCategory());

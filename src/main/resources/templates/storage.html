@@ -43,6 +43,23 @@
     color: #2a9d8f;
     font-size: 1.2em;
   }
+
+  .buy-button {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #2a9d8f;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .buy-button:hover {
+    background-color: #21867a;
+    transform: translateY(-2px);
+  }
 </style>
 
 <div th:fragment="content">
@@ -51,6 +68,11 @@
       <img th:src="@{'/app/images/' + ${item.fileUrl}}" alt="Item image" />
       <p class="product-name" th:text="${item.name}">Item Name</p>
       <p class="product-price" th:text="${item.price}">Price</p>
+
+      <form action="@{/app/cart/add}" method="post">
+        <input type="hidden" name="itemId" th:value="${item.id}" />
+        <button type="submit" class="buy-button">Buy</button>
+      </form>
     </li>
   </ul>
 </div>

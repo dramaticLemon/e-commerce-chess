@@ -47,8 +47,6 @@ public class AdminItemContoller {
 	@RequestParam("file") MultipartFile file) {
 		try {
 			item.setFile(file);
-			System.out.println(item);
-			System.out.println(item.getFile());
             adminItemService.createItem(item);
 			
 

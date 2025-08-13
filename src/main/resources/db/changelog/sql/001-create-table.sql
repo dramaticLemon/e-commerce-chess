@@ -11,6 +11,7 @@ create table items (
 	price NUMERIC(38, 2) not null,
 	category_id BIGINT not null,
 	id bigserial not null,
+	quantity integer not null,
 	updated_at TIMESTAMP(6) not null,
 	created_at TIMESTAMP(5) not null,
 	fileUrl VARCHAR(255),

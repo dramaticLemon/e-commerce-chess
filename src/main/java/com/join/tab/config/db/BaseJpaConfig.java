@@ -39,7 +39,6 @@ public class BaseJpaConfig {
     protected Properties jpaProperties() { 
         Properties props = new Properties();
         props.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        props.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
         props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         props.setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
         return props;

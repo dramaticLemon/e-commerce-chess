@@ -10,21 +10,24 @@ public class ItemDto {
     private BigDecimal price;
     private Category category;
     private int idCategory;
+    private int quantity;
 
     public ItemDto() {}
 
-    public ItemDto(Long id, String name, BigDecimal price, Category category) {
+    public ItemDto(Long id, String name, BigDecimal price, Category category, int quantity) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
+        this.quantity = quantity;
     }
 
-    public ItemDto(Long id, String name, BigDecimal price, int idCategory) {
+    public ItemDto(Long id, String name, BigDecimal price, int idCategory, int quantity) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.idCategory = idCategory;
+        this.quantity = quantity;
     }
 
     
@@ -67,6 +70,14 @@ public class ItemDto {
 
     public void setIdCategory(int idCategory) {
         this.idCategory = idCategory;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     
