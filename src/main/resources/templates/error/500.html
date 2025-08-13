@@ -1,0 +1,69 @@
+<style>
+  #layoutError {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+  }
+
+  #layoutError_content {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 480px;
+  }
+
+  #layoutError_content h1.display-1 {
+    font-size: 8rem;
+    font-weight: 700;
+    color: #dc3545; /* Bootstrap красный */
+  }
+
+  #layoutError_content p.lead {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #6c757d;
+  }
+
+  #layoutError_content a {
+    font-weight: 600;
+    text-decoration: none;
+    color: #0d6efd; /* Bootstrap синий */
+    transition: color 0.3s ease;
+  }
+
+  #layoutError_content a:hover {
+    color: #0a58ca;
+    text-decoration: underline;
+  }
+
+  #layoutError_content i.fas.fa-arrow-left {
+    margin-right: 0.5rem;
+  }
+</style>
+
+<main>
+    <div id="layoutError">
+        <div id="layoutError_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center mt-4">
+                                <h1 class="display-1">500</h1>
+                                <p class="lead">Internal Server Error</p>
+                                <a href="/app/dashboard">
+                                    <i class="fas fa-arrow-left me-1"></i>
+                                    Return to Dashboard
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</main>

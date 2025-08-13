@@ -1,0 +1,31 @@
+</div>
+<main>
+  <div class="container">
+    <h2 class="text-center mb-5">Sign Up</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+        <form action="#" method="POST" class="mt-4">
+
+          <div class="mb-3">
+            <label for="signup-username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="signup-username" name="username" required />
+          </div>
+
+          <div class="mb-3">
+			<label for="signup-password" class="form-label">Password</label>
+			<input type="password" class="form-control" id="signup-password" required value="" />
+		 </div>
+		 <div class="mb-3">
+			<label for="signup-repeat-password" class="form-label">Repeat password</label>
+			<input type="password" class="form-control" id="signup-repeat-password" required value="" />
+		</div>
+			<input type="hidden" name="redirect_to" value="http://localhost/" />
+			<button type="submit" class="btn btn-primary w-100 mt-3">Sign Up</button>
+			<p class="mt-2 text-center">Already have an account? <a href="/auth/sign-in">Sign in here</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+

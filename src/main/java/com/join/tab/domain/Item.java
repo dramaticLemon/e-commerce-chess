@@ -17,6 +17,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -42,23 +43,31 @@ public class Item {
 	@JoinColumn(name = "category_id", nullable=false)
 	private Category category;
 
+	@NotBlank(message="File path cannot be blank")
+	@Pattern(
+        regexp = "^[a-z0-9.-]+/[\\w!\\-\\.\\*'\\(\\)]+(\\/[\\w!\\-\\.\\*'\\(\\)]+)*$",
+        message = "Invalid MinIO object path format"
+    )
+	private String fileUrl;
+
 	@NotNull(message="CreatedAt must not be null")
 	@Column(name="created_at", nullable=false, updatable=false)
 	private LocalDateTime createdAt;
 	
 	@NotNull(message="UpdatedAt must not be null")
-	@Column(name="update_at", nullable=false)
-	private LocalDateTime updateAt;
+	@Column(name="updated_at", nullable=false)
+	private LocalDateTime updatedAt;
 
 	public Item() {
 	}
 
 	public Item(Long id, String name, BigDecimal price,
-	 Category category) {
+	 Category category, String fileUrl) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.category = category;
+		this.fileUrl = fileUrl;
 	}
 
 
@@ -66,12 +75,12 @@ public class Item {
 	public void onCreate() {
 		LocalDateTime time = LocalDateTime.now();
 		this.createdAt =time;
-		this.updateAt = time;
+		this.updatedAt = time;
 	}
 
 	@PreUpdate
 	public void onUpdate() {
-		this.updateAt = LocalDateTime.now();
+		this.updatedAt = LocalDateTime.now();
 	}
 
 	public Long getId() {
@@ -145,12 +154,24 @@ public class Item {
 		return createdAt;
 	}
 
-	public LocalDateTime getUpdateAt() {
-		return updateAt;
+	public LocalDateTime getUpdatdeAt() {
+		return updatedAt;
 	}
 
-	public void setUpdateAt(LocalDateTime updateAt) {
-		this.updateAt = updateAt;
+	public void setUpdateAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getFileUrl() {
+		return fileUrl;
+	}
+
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	

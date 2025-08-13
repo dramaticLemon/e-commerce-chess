@@ -27,6 +27,8 @@ public class ItemDto {
         this.idCategory = idCategory;
     }
 
+    
+
     public Long getId() {
         return id;
     }

@@ -11,6 +11,7 @@ import com.join.tab.services.admin.AdminCategoryService;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+	// private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 	private final AdminCategoryService adminCategoryService;
 
     public GlobalExceptionHandler(AdminCategoryService adminCategoryService) {
@@ -32,5 +33,14 @@ public class GlobalExceptionHandler {
         model.addAttribute("content", "admin/items");
         return "admin/base";
     }
+
+	// @ExceptionHandler(Exception.class)
+    // public String handleAllExceptions(Exception ex, Model model, HttpServletRequest request) {
+    //     log.error("Unhandled exception occurred at " + request.getRequestURI(), ex);
+    //     model.addAttribute("errorMessage", "внутренняя ошибка. Пожалуйста, попробуйте позже.");
+    //     model.addAttribute("categories", adminCategoryService.getAllCategory());
+    //     return "error/500";
+    // }
+
 
 }

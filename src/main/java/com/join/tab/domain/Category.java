@@ -39,8 +39,8 @@ public class Category {
 	@Column(name="created_at", nullable=false, updatable=false)
 	private LocalDateTime createdAt;
 	
-	@Column(name="update_at", nullable=false)
-	private LocalDateTime updateAt;
+	@Column(name="updated_at", nullable=false)
+	private LocalDateTime updatedAt;
 
 	@Valid
 	@OneToMany(mappedBy="category", fetch=FetchType.LAZY)
@@ -57,12 +57,12 @@ public class Category {
 	public void onCreate() {
 		LocalDateTime time = LocalDateTime.now();
 		this.createdAt =time;
-		this.updateAt = time;
+		this.updatedAt = time;
 	}
 
 	@PreUpdate
 	public void onUpdate() {
-		this.updateAt = LocalDateTime.now();
+		this.updatedAt = LocalDateTime.now();
 	}
 
 	public Long getId() {
@@ -90,7 +90,7 @@ public class Category {
 	}
 
 	public LocalDateTime getUpdatedAt() {
-		return updateAt;
+		return updatedAt;
 	}
 	
 	
@@ -133,11 +133,11 @@ public class Category {
 	}
 
 	public LocalDateTime getUpdateAt() {
-		return updateAt;
+		return updatedAt;
 	}
 
-	public void setUpdateAt(LocalDateTime updateAt) {
-		this.updateAt = updateAt;
+	public void setUpdateAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public Set<Item> getItems() {

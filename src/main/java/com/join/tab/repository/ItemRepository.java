@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.join.tab.domain.Item;
+import com.join.tab.dto.ItemUserViewDto;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
@@ -80,6 +81,13 @@ public class ItemRepository {
 	
 	public Item getItem(Long id) {
 		return entityManager.find(Item.class, id);
+	}
+	
+	public List<ItemUserViewDto> getAllItemsForUser() {
+		return entityManager.createQuery(
+			"select i from Item i join fetch i.category",
+			ItemUserViewDto.class
+		).getResultList();
 	}
 	
 }

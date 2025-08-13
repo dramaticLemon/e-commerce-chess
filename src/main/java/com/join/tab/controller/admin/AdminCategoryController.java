@@ -12,15 +12,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.join.tab.dto.CategoryDto;
 import com.join.tab.services.admin.AdminCategoryService;
 
+/**
+ * All endpoints require administrator rights.
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminCategoryController {
-	/*
-	 * added
-	 * edit
-	 * get all
-	 * remove
-	*/
 
 	private final AdminCategoryService adminCategoryService;
 
@@ -29,18 +26,28 @@ public class AdminCategoryController {
 	}
 
 	/**
-	 * Render main page-management-category and show create category in database
-	 * @param model
-	 * @return
+	 * Render main page management category.
+	 * @param model object Model for data transfer.
+	 * @return name template for rendering.
 	 */
 	@GetMapping("/category")
-	public String index(Model model) {
+	public String listCategories(Model model) {
     	model.addAttribute("content", "admin/category");
 		model.addAttribute("categories", adminCategoryService.getAllCategory());
 
 		return "admin/base";
 	}
 
+	/**
+	 * Handlers a POST request to create a new category
+	 * <p>
+	 * Receives category data from a form, passes it to the service for datebase persistence,
+	 * and redirect the user to the category management page upon successful creation.
+	 * 
+	 * @param categoryDto The CategoryDto object containing the new category's data submitted from the form.
+	 * @param model       The Model object for interacting with the view.
+	 * @return			  A redirect string to the "/admin/category" URL to display the updated category list.
+	 */
 	@PostMapping("/category")
 	public String createCategory(@ModelAttribute CategoryDto categoryDto, Model model) {
 		adminCategoryService.createCategory(categoryDto);

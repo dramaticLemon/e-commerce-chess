@@ -1,5 +1,7 @@
 package com.join.tab.services.admin;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +12,7 @@ import com.join.tab.domain.Category;
 import com.join.tab.domain.Item;
 import com.join.tab.dto.ItemDto;
 import com.join.tab.dto.ItemFormDto;
+import com.join.tab.dto.ItemUserViewDto;
 import com.join.tab.exception.DuplicateFieldException;
 import com.join.tab.repository.ItemRepository;
 
@@ -23,9 +26,14 @@ import com.join.tab.repository.ItemRepository;
 public class AmdinItemService {
 	
 	private final ItemRepository itemRepository;
+	private final MinioService minioService;
 
-	public AmdinItemService(ItemRepository itemRepository) {
+	public AmdinItemService(
+		ItemRepository itemRepository,
+		MinioService minioService
+		) {
 		this.itemRepository = itemRepository;
+		this.minioService = minioService;
 	}
 
 	public List<ItemDto> getAllItems() {
@@ -41,20 +49,24 @@ public class AmdinItemService {
 	}
 
 	@Transactional
-	public void createItem(ItemFormDto itemFormDto) {
+	public void createItem(ItemFormDto itemFormDto) throws Exception{
 
 		if (itemRepository.existsByName(itemFormDto.getName())) {
         	throw new DuplicateFieldException("Item name already exists");
     	}
+		InputStream inputStream = new BufferedInputStream(itemFormDto.getFile().getInputStream(), 3 * 1024 * 1024);
 
+
+		String fileUrl = minioService.uploadFile(inputStream, itemFormDto.getFile().getOriginalFilename());
 		Item item = new Item();
 		item.setName(itemFormDto.getName());
 		item.setPrice(itemFormDto.getPrice());
 		Category category = new Category();
 		category.setId(itemFormDto.getCategory());
 		item.setCaregory(category);
-		itemRepository.save(item);
+		item.setFileUrl(fileUrl);
 
+		itemRepository.save(item);
 	}
 
 	public void dropItem(Long id) {
@@ -82,5 +94,9 @@ public class AmdinItemService {
 		item.setCaregory(category);
 
 		itemRepository.update(item);
+	}
+
+	public List<ItemUserViewDto> getAllItemsForUser() {
+		return itemRepository.getAllItemsForUser();
 	}
 }

@@ -1,43 +1,56 @@
+<style>
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 220px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .product-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  
+  .product-card img {
+    max-width: 100%;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 12px;
+  }
+  
+  .product-name {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  
+  .product-price {
+    font-weight: 700;
+    color: #2a9d8f;
+    font-size: 1.2em;
+  }
+</style>
+
 <div th:fragment="content">
-    <section class="products-section">
-        <h3>Most popular</h3>
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="/img/figure-black/black-bishop.png" alt="Название товара 1">
-                <h4>Название товара 1</h4>
-                <p class="price">999 $</p>
-                <a href="#" class="btn btn-secondary">Buy</a>
-            </div>
-            <div class="product-card">
-                <img src="/img/figure-black/black-rook.png" alt="Название товара 2">
-                <h4>Название товара 2</h4>
-                <p class="price">1299 $</p>
-                <a href="#" class="btn btn-secondary">Buy</a>
-            </div>
-            <div class="product-card">
-                <img src="/img/figure-black/black-pawn.png" alt="Название товара 3">
-                <h4>Название товара 3</h4>
-                <p class="price">499 $</p>
-                <a href="#" class="btn btn-secondary">Buy</a>
-            </div>
-            <div class="product-card">
-                <img src="/img/figure-black/black-knight.png" alt="Название товара 3">
-                <h4>Название товара 3</h4>
-                <p class="price">499 $</p>
-                <a href="#" class="btn btn-secondary">Buy</a>
-            </div>
-            <div class="product-card">
-                <img src="/img/figure-black/black-queen.png" alt="Название товара 3">
-                <h4>Название товара 3</h4>
-                <p class="price">499 $</p>
-                <a href="#" class="btn btn-secondary">Buy</a>
-            </div>
-            <div class="product-card">
-                <img src="/img/figure-black/black-king.png" alt="Название товара 3">
-                <h4>Название товара 3</h4>
-                <p class="price">499 $</p>
-                <a href="#" class="btn btn-secondary">Buy</a>
-            </div>
-        </div>
-    </section>
+  <ul class="product-list">
+    <li class="product-card" th:each="item : ${items}">
+      <img th:src="@{'/app/images/' + ${item.fileUrl}}" alt="Item image" />
+      <p class="product-name" th:text="${item.name}">Item Name</p>
+      <p class="product-price" th:text="${item.price}">Price</p>
+    </li>
+  </ul>
 </div>

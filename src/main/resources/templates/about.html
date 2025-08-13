@@ -1,241 +1,214 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Chess Store Online</title>
-    <link rel="stylesheet" href="style.css">
-	<style>
-		/* Base styles */
-body {
-    font-family: Arial, sans-serif;
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
     margin: 0;
-    padding: 0;
-    background-color: #f8f8f8;
-    color: #333;
-}
+    background-color: #f9f9f9;
+  }
 
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
-}
+  main {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
 
-/* Header (same as previous templates) */
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+  h1, h2, h3, h4 {
+    color: #1a1a1a;
+    margin-top: 0;
+  }
 
-.logo {
-    font-size: 1.5em;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
-}
+  p {
+    line-height: 1.6;
+    margin-bottom: 1em;
+  }
 
-.main-nav a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #555;
-    font-weight: bold;
-}
-
-.main-nav .active {
-    color: #007BFF;
-}
-
-/* About Hero Section */
-.about-hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1920x400') no-repeat center center/cover;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  /* Секция Hero */
+  .about-hero {
+    background: linear-gradient(135deg, #264653, #2a9d8f);
+    color: #fff;
+    padding: 60px 20px;
     text-align: center;
-    color: white;
-}
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+  .about-hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.4em;
+  }
+  .about-hero p {
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
 
-.about-hero-content {
-    background: rgba(0, 0, 0, 0.5);
+  /* Секция Our Story */
+  .about-story .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  .story-image img {
+    width: 100%;
+    max-width: 480px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .story-text {
+    flex: 1;
+    min-width: 280px;
+  }
+  .story-text h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  /* Секция Mission */
+  .mission {
+    background-color: #e9f5f2;
+    padding: 40px 20px;
+    border-radius: 8px;
+    margin-bottom: 50px;
+  }
+  .mission h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+  .mission-grid {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .mission-item {
+    background: #fff;
+    flex: 1 1 280px;
     padding: 20px;
     border-radius: 8px;
-}
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+  }
+  .mission-item:hover {
+    transform: translateY(-5px);
+  }
+  .mission-item h3 {
+    margin-top: 0;
+    color: #2a9d8f;
+    margin-bottom: 12px;
+  }
 
-.about-hero h1 {
-    font-size: 3em;
-    margin: 0;
-}
-
-.about-hero p {
-    font-size: 1.2em;
-    margin-top: 10px;
-}
-
-/* Our Story Section */
-.about-story .container {
+  /* Секция Team */
+  .team h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+  }
+  .team-grid {
     display: flex;
-    align-items: center;
     gap: 40px;
-    padding: 50px 20px;
-}
-
-.story-text {
-    flex: 1;
-}
-
-.story-image {
-    flex: 1;
-    text-align: center;
-}
-
-.story-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Mission Section */
-.mission {
-    background-color: #fff;
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.mission h2 {
-    margin-bottom: 40px;
-}
-
-.mission-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.mission-item h3 {
-    color: #007BFF;
-}
-
-/* Team Section */
-.team {
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.team h2 {
-    margin-bottom: 40px;
-}
-
-.team-grid {
-    display: flex;
     justify-content: center;
-    gap: 30px;
-}
-
-.team-member {
-    text-align: center;
-}
-
-.team-member img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.team-member h4 {
-    margin: 0;
-}
-
-/* Footer (same as previous templates) */
-.main-footer {
-    text-align: center;
+    flex-wrap: wrap;
+  }
+  .team-member {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
     padding: 20px;
-    background-color: #333;
-    color: white;
-}
-	</style>
-</head>
-<body>
+    width: 220px;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+  }
+  .team-member:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  .team-member img {
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+  .team-member h4 {
+    margin: 0 0 8px;
+    color: #264653;
+  }
+  .team-member p {
+    color: #555;
+    font-weight: 500;
+  }
 
-    <header class="main-header">
-        <a href="/" class="logo">Chess Store</a>
-        <nav class="main-nav">
-            <a href="/catalog">Catalog</a>
-            <a href="/about" class="active">About Us</a>
-            <a href="/contact">Contact</a>
-        </nav>
-    </header>
+  /* Адаптив */
+  @media (max-width: 768px) {
+    .about-story .container {
+      flex-direction: column;
+      text-align: center;
+    }
+    .story-text {
+      min-width: 100%;
+    }
+    .mission-grid, .team-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
 
-    <main>
-        <section class="about-hero">
-            <div class="about-hero-content">
-                <h1>Our Story</h1>
-                <p>More than just a store, we are a community passionate about chess.</p>
-            </div>
-        </section>
+<main>
+  <section class="about-hero">
+    <div class="about-hero-content">
+      <h1>Our Story</h1>
+      <p>More than just a store, we are a community passionate about chess.</p>
+    </div>
+  </section>
 
-        <section class="about-story">
-            <div class="container">
-                <div class="story-image">
-                    <img src="https://via.placeholder.com/500" alt="An old chess board">
-                </div>
-                <div class="story-text">
-                    <h2>Our Journey</h2>
-                    <p>Founded in 2020 by a group of chess enthusiasts, our store began with a simple mission: to provide high-quality chess sets to players of all levels. From humble beginnings selling handmade wooden sets, we've grown to offer a curated selection of modern electronic boards, exclusive pieces, and educational resources. We believe chess is more than a game—it's a tool for strategic thinking and personal growth.</p>
-                </div>
-            </div>
-        </section>
+  <section class="about-story">
+    <div class="container">
+      <div class="story-image">
+        <img src="/img/chess-board.jpeg" alt="An old chess board">
+      </div>
+      <div class="story-text">
+        <h2>Our Journey</h2>
+        <p>Founded in 2020 by a group of chess enthusiasts, our store began with a simple mission: to provide high-quality chess sets to players of all levels. From humble beginnings selling handmade wooden sets, we've grown to offer a curated selection of modern electronic boards, exclusive pieces, and educational resources. We believe chess is more than a game—it's a tool for strategic thinking and personal growth.</p>
+      </div>
+    </div>
+  </section>
 
-        <section class="mission">
-            <div class="container">
-                <h2>Our Mission</h2>
-                <div class="mission-grid">
-                    <div class="mission-item">
-                        <h3>Quality Products</h3>
-                        <p>We handpick every item to ensure superior craftsmanship and durability for years of play.</p>
-                    </div>
-                    <div class="mission-item">
-                        <h3>Community Building</h3>
-                        <p>We are dedicated to creating a vibrant community that connects chess lovers from around the world.</p>
-                    </div>
-                    <div class="mission-item">
-                        <h3>Empowering Players</h3>
-                        <p>We provide the tools and resources you need to improve your skills and master the game.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <section class="mission">
+    <div class="container">
+      <h2>Our Mission</h2>
+      <div class="mission-grid">
+        <div class="mission-item">
+          <h3>Quality Products</h3>
+          <p>We handpick every item to ensure superior craftsmanship and durability for years of play.</p>
+        </div>
+        <div class="mission-item">
+          <h3>Community Building</h3>
+          <p>We are dedicated to creating a vibrant community that connects chess lovers from around the world.</p>
+        </div>
+        <div class="mission-item">
+          <h3>Empowering Players</h3>
+          <p>We provide the tools and resources you need to improve your skills and master the game.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <section class="team">
-            <div class="container">
-                <h2>Meet the Team</h2>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <img src="https://via.placeholder.com/200" alt="Team member 1">
-                        <h4>Jane Doe</h4>
-                        <p>Founder & CEO</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="https://via.placeholder.com/200" alt="Team member 2">
-                        <h4>John Smith</h4>
-                        <p>Head of Product</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <p>&copy; 2025 Chess Store. All rights reserved.</p>
-    </footer>
-
-</body>
-</html>
+  <section class="team">
+    <div class="container">
+      <h2>Meet the Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="/img/person-2.jpeg" alt="Team member 1">
+          <h4>Jane Doe</h4>
+          <p>Founder & CEO</p>
+        </div>
+        <div class="team-member">
+          <img src="/img/person-1.jpg" alt="Team member 2">
+          <h4>John Smith</h4>
+          <p>Head of Product</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

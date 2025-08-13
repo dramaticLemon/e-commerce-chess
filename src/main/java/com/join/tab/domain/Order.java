@@ -39,8 +39,8 @@ public class Order {
 	private LocalDateTime createdAt;
 	
 	@NotNull(message="UpdatedAt must not be null")
-	@Column(name="update_at", nullable=false)
-	private LocalDateTime updateAt;
+	@Column(name="updated_at", nullable=false)
+	private LocalDateTime updatedAt;
 
 	public Order() { }
 	
@@ -54,12 +54,12 @@ public class Order {
 	public void onCreate() {
 		LocalDateTime time = LocalDateTime.now();
 		this.createdAt =time;
-		this.updateAt = time;
+		this.updatedAt = time;
 	}
 
 	@PreUpdate
 	public void onUpdate() {
-		this.updateAt = LocalDateTime.now();
+		this.updatedAt = LocalDateTime.now();
 	}
 	
 	public Long getId() {
@@ -85,8 +85,8 @@ public class Order {
 		return createdAt;
 	}
 
-	public LocalDateTime getUpdateAt() {
-		return updateAt;
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
 	}
 
 	@Override
