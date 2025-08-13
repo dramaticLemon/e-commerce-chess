@@ -31,7 +31,7 @@ create table order_item (
 create table orders (
 	created_at TIMESTAMP(6) not null,
 	customer_id bigint,
-	id bigserial not null,
+	id bigserial not null,uj
 	updated_at timestamp(6) not null,
 	PRIMARY KEY (id)
 );

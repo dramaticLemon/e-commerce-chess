@@ -1,0 +1,135 @@
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .cart-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .item-info {
+            display: flex;
+            align-items: center;
+        }
+        .item-info img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .item-details h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .item-details p {
+            margin: 5px 0;
+            color: #777;
+        }
+        .item-actions {
+            display: flex;
+            align-items: center;
+        }
+        .item-actions input {
+            width: 50px;
+            text-align: center;
+            margin: 0 10px;
+        }
+        .item-actions button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .cart-summary {
+            text-align: right;
+            padding-top: 20px;
+        }
+        .cart-summary h2 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+        .cart-summary p {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+        .checkout-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+
+
+<div th:fragment="content">
+    <h1 th:text="${sessionId}"></h1>
+    <div class="cart-container">
+        <h1>Корзина</h1>
+
+        <div class="cart-item">
+            <div class="item-info">
+
+                <div class="item-details">
+                    <h3>Смартфон XYZ</h3>
+                    <p>Цена: <span class="item-price">50 000</span> ₽</p>
+                </div>
+            </div>
+            <div class="item-actions">
+                <label for="quantity-1">Количество:</label>
+                <input type="number" id="quantity-1" value="1" min="1">
+                <button class="remove-item">Удалить</button>
+            </div>
+        </div>
+
+        <div class="cart-item">
+            <div class="item-info">
+                <div class="item-details">
+                    <h3>Беспроводные наушники</h3>
+                    <p>Цена: <span class="item-price">8 000</span> ₽</p>
+                </div>
+            </div>
+            <div class="item-actions">
+                <label for="quantity-2">Количество:</label>
+                <input type="number" id="quantity-2" value="2" min="1">
+                <button class="remove-item">Удалить</button>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="cart-summary">
+            <h2>Итого:</h2>
+            <p>Общая стоимость: <span id="total-price">66 000</span> ₽</p>
+        </div>
+        
+        <a href="#" class="checkout-button">Перейти к оформлению заказа</a>
+
+    </div>
+
+    </body>
+</div>
