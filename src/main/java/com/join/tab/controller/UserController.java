@@ -2,6 +2,7 @@ package com.join.tab.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.join.tab.domain.User;
+import com.join.tab.dto.LoginDto;
 import com.join.tab.dto.UserDto;
 import com.join.tab.services.SecurityService;
 import com.join.tab.services.UserService;
@@ -30,24 +32,46 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	// login
+	/**
+	 * User login form
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/sign-in")
 	public String login(Model model) {
+		model.addAttribute("loginForm", new LoginDto());
 		model.addAttribute("content", "/sign-in");
 		
 		return "_layout";
 	}
 
 	@PostMapping("/sign-in")
-	public String loginPostForm(Model model) {
+	public String loginPostForm(
+		@ModelAttribute("loginForm") @Valid LoginDto loginForm, BindingResult bindingResult, Model model) {
 
-		model.addAttribute("content", "/sign-in");
-		
-		return "_layout";
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("loginForm", loginForm);
+			model.addAttribute("content", "/sign-in");
+			return "_layout";
+		}
+		try {
+			securityService.autoLogin(loginForm.getUsername(), loginForm.getPassword());
+			model.addAttribute("content", "/index");
+			return "_layout";
+
+		} catch (AuthenticationException e) {
+			bindingResult.reject("login.error", "Invalid username or password");
+			model.addAttribute("content", "/sign-in");
+			return "_layout";
+		}
 	}
 
 
-	// register
+	/**
+	 * User registration form
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/sign-up")
 	public String register(Model model) {
 		model.addAttribute("userForm", new User());
@@ -56,17 +80,9 @@ public class UserController {
 		return "_layout";
 	}
 
-
-	// реализовать предупрежение направильный пароль почата нимя ( или оно занято )
-	// придумать как сохранить все роли в базе даннх сразу и это будет Enum
 	@PostMapping("/sign-up")
 	public String registerPostForm(
 		Model model, @ModelAttribute("userForm") @Valid UserDto userForm, BindingResult bindingResult) {
-			
-		log.info("-----------{}", userForm.getName());
-		log.info("-----------{}", userForm.getEmail());
-		log.info("-----------{}", userForm.getPassword());
-		log.info("-----------{}", userForm.getConfirmPassword());
 		
 		if (bindingResult.hasErrors()) {
 			log.info("-- {}", bindingResult.getAllErrors());
