@@ -88,6 +88,9 @@
 
 <div th:fragment="content">
     <h1 th:text="${sessionId}"></h1>
+    <div sec:authorize="isAuthenticated()">
+        Welcome, <span sec:authentication="name"></span>!
+    </div>
     <div class="cart-container">
         <h1>Корзина</h1>
 

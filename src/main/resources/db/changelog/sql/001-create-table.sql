@@ -81,7 +81,3 @@ Foreign Key (item_id) REFERENCES items(id);
 alter table order_item
 add constraint fk_order_item_order
 Foreign Key (order_id) REFERENCES orders(id);
-
-
-insert into roles (name) values ('ROLE_USER');
-insert into roles (name) values ('ROLE_ADMIN');

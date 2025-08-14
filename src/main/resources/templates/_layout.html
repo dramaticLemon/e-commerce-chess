@@ -34,13 +34,23 @@
 				</ul>
 
 				<ul class="navbar-nav ms-auto">
+					<!-- Cart всегда показывается -->
 					<li class="nav-item">
 						<a class="nav-link" href="/app/cart">
 							<i class="bi bi-cart"></i> Cart
 						</a>
 					</li>
-					<li class="nav-item">
+
+					<!-- Показываем только если пользователь НЕ аутентифицирован -->
+					<li class="nav-item" sec:authorize="!isAuthenticated()">
 						<a class="nav-link" href="/app/auth/sign-in">Login</a>
+					</li>
+
+					<!-- Показываем только если пользователь аутентифицирован -->
+					<li class="nav-item" sec:authorize="isAuthenticated()">
+						<form th:action="@{/logout}" method="post">
+							<button class="nav-link btn btn-link" type="submit">Logout</button>
+						</form>
 					</li>
 				</ul>
 			</div>

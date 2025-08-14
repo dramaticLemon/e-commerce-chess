@@ -1,5 +1,7 @@
 package com.join.tab.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,9 @@ public class ShoppingCartController{
 	@GetMapping("/cart")
 	public String showCart(Model model, HttpSession session) {
 		String sessionId = session.getId();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        model.addAttribute("username", currentPrincipalName);
 		model.addAttribute("content", "/cart-item");
 		model.addAttribute("sessionId", sessionId);
 		return "_layout";

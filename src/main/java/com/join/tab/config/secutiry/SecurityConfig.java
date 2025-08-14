@@ -33,16 +33,40 @@ public class SecurityConfig {
     }
 
    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authenticationManager(authManager)
-            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()
+            // public page
+                .requestMatchers(
+      "/app/auth/**",
+                    "/app/about-us",
+                    "/app/contact",
+                    "/css/**",
+                    "/js/**",
+                    "/img/**",
+                    "/assets/**",
+                    "/app/storage",
+                    "/app/cart"
+                    ).permitAll()
+                // admin page
+                .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
-            );
-
+            )
+            .formLogin(form -> form
+                .loginPage("/app/auth/sign-in")
+                .defaultSuccessUrl("/app/dashboard", true)
+                .failureUrl("/app/auth/sign-in?error=true")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/app/dashboard")
+                .permitAll()
+        );
+           
         return http.build();
     }
+
+
 
 }

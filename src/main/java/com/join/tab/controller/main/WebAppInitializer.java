@@ -1,11 +1,16 @@
 package com.join.tab.controller.main;
 
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.join.tab.config.ApplicationGlobalContainer;
+import com.join.tab.config.secutiry.SecurityConfig;
 
+import jakarta.servlet.FilterRegistration;
 import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRegistration;
 
 @PropertySource("classpath:application.properties")
@@ -15,7 +20,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{ ApplicationGlobalContainer.class };
+        return new Class[]{ ApplicationGlobalContainer.class, SecurityConfig.class };
     }
 
     @Override
@@ -39,6 +44,14 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
             location, maxFileSize, maxRequestSize, fileSizeThreshold);
         registration.setMultipartConfig(multipartConfig);
     }
+
+     @Override
+        public void onStartup(ServletContext servletContext) throws ServletException {
+            super.onStartup(servletContext);
+            FilterRegistration.Dynamic securityFilter = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain"));
+            securityFilter.addMappingForUrlPatterns(null, false, "/*");
+        }
+
 
 }
 

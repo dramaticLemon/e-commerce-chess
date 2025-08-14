@@ -7,3 +7,10 @@ databaseChangeLog:
             path: db/changelog/sql/001-create-table.sql
             relativeToChangelogFile: false
             encoding: utf-8
+  - changeSet:
+      id: 2
+      author: dch
+      changes:
+        - sqlFile:
+            path: db/changelog/sql/002-creare-firsr-user-admin.sql
+            encoding: utf-8

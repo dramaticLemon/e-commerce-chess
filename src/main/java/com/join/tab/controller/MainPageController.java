@@ -40,19 +40,23 @@ public class MainPageController {
 
 	@GetMapping("/dashboard")
 	public String index(Model model) {
+
 		model.addAttribute("content", "/index");
+
 		return "_layout";
 	}
 	
 	@GetMapping("/about-us")
 	public String aboutUs(Model model) {
 		model.addAttribute("content", "/about");	
+
 		return "_layout";
 	}
 
 	@GetMapping("/contact")
 	public String contact(Model model) {
 		model.addAttribute("content", "/contact");
+
 		return "_layout";
 	}
 
@@ -61,6 +65,7 @@ public class MainPageController {
 		List<ItemUserViewDto> items = adminItemService.getAllItemsForUser();
 		model.addAttribute("items", items);
 		model.addAttribute("content", "/storage");
+
 		return "_layout";
 	}
 

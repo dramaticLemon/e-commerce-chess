@@ -1,13 +1,9 @@
 
-select * from user_roles;
-select * from users;
-select * from 
-INSERT INTO roles(id, name) VALUES (1, 'ROLE_USER');
-
+drop table users, user_roles, roles, orders, order_item, items, databasechangeloglock, databasechangelog, categories cascade;
 TRUNCATE TABLE users RESTART IDENTITY CASCADE;
 
--- очистить всю базу данных
-drop table users, orders, order_item, items, databasechangeloglock, databasechangelog, categories cascade;
+select * from users;
+
 drop table categories;
 select * from categories;
 insert into categories (created_at, update_at, category_code, category_name)
