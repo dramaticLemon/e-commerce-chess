@@ -121,11 +121,6 @@ public class Item {
 		return category;
 	}
 
-	public void setCaregory(Category category) {
-		this.category = category;
-	}
-
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

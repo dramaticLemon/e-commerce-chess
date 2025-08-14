@@ -1,26 +1,42 @@
 package com.join.tab.domain;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+/**
+ * Simple java bean object ther represent a User
+ */
+// @UniqueUser
 @Entity
 @Table(name="users")
-public class User {
+public class User implements UserDetails{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -53,6 +69,17 @@ public class User {
 	@Column(name="updated_at", nullable=false)
 	private LocalDateTime updatedAt;
 
+	@Transient
+	private String confirmPassword; // при сериализации никуда ни записываем
+
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+		name="user_roles",
+		joinColumns= @JoinColumn(name="user_id"),
+		inverseJoinColumns= @JoinColumn(name="role_id")
+	)
+	private Set<Role> roles;
+
 	public User () { } 
 
 	public User (
@@ -60,13 +87,15 @@ public class User {
 		String name,
 		String password,
 		String email,
-		List<Order> orders
+		List<Order> orders,
+		Set<Role> roles
 		) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.email = email;
 		this.orders = orders;
+		this.roles = roles;
 	}
 
 	@PrePersist
@@ -93,6 +122,8 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@Override
 	public String getPassword() {
 		return password;
 	}
@@ -150,6 +181,62 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", orders="
 				+ orders + "]";
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return roles.stream()
+            .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+            .collect(Collectors.toSet());
+	}
+
+	@Override
+	public String getUsername() {
+		return this.name;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 	
 

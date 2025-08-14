@@ -31,7 +31,7 @@ create table order_item (
 create table orders (
 	created_at TIMESTAMP(6) not null,
 	customer_id bigint,
-	id bigserial not null,uj
+	id bigserial not null,
 	updated_at timestamp(6) not null,
 	PRIMARY KEY (id)
 );
@@ -45,6 +45,26 @@ create table users (
 	password VARCHAR(255) not null,
 	PRIMARY KEY (id)
 );
+
+create table roles (
+	id bigserial not null,
+	name VARCHAR(255) not null UNIQUE,
+	PRIMARY key (id)
+);
+
+create table user_roles (
+	user_id BIGINT not null,
+	role_id bigint not null,
+	PRIMARY key (user_id, role_id)
+);
+
+alter table user_roles
+add constraint fk_user_roles_user
+Foreign Key (user_id) REFERENCES users(id);
+
+alter table user_roles
+add constraint fk_user_roles_role
+Foreign Key (role_id) REFERENCES roles(id);
 
 alter table items
 add constraint fk_items_category
@@ -63,3 +83,5 @@ add constraint fk_order_item_order
 Foreign Key (order_id) REFERENCES orders(id);
 
 
+insert into roles (name) values ('ROLE_USER');
+insert into roles (name) values ('ROLE_ADMIN');

@@ -63,7 +63,7 @@ public class AmdinItemService {
 		item.setPrice(itemFormDto.getPrice());
 		Category category = new Category();
 		category.setId(itemFormDto.getCategory());
-		item.setCaregory(category);
+		item.setCategory(category);
 		item.setFileUrl(fileUrl);
 		item.setQuantity(itemFormDto.getQuantity());
 
@@ -93,7 +93,7 @@ public class AmdinItemService {
 		Category category = new Category();
 		category.setId(itemFormDto.getCategory());
 		
-		item.setCaregory(category);
+		item.setCategory(category);
 
 		itemRepository.update(item);
 	}
