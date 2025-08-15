@@ -46,7 +46,8 @@ public class SecurityConfig {
                     "/img/**",
                     "/assets/**",
                     "/app/storage",
-                    "/app/cart"
+                    "/app/cart",
+                    "/app/cart/add"
                     ).permitAll()
                 // admin page
                 .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -62,7 +63,10 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/app/dashboard")
                 .permitAll()
-        );
+            )
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/app/cart/add") 
+            );
            
         return http.build();
     }

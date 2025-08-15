@@ -42,12 +42,16 @@ public class Order {
 	@Column(name="updated_at", nullable=false)
 	private LocalDateTime updatedAt;
 
+	@Column(name="is_active", nullable=false)
+	private boolean isActive;
+
 	public Order() { }
 	
-	public Order(Long id, User user, List<OrderItem> items) {
+	public Order(Long id, User user, List<OrderItem> items, boolean isActive) {
 		this.id = id;
 		this.user = user;
 		this.items = items;
+		this.isActive = isActive;
 	}
 
 	@PrePersist
@@ -125,6 +129,14 @@ public class Order {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	

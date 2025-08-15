@@ -72,7 +72,7 @@ public class OrderItem {
 		return item;
 	}
 
-	public void setIntem(Item item) {
+	public void setItem(Item item) {
 		this.item = item;
 	}
 

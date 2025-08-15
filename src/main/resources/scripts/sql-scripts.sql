@@ -6,6 +6,13 @@ select * from users;
 
 drop table categories;
 select * from categories;
+
+
+
+insert into categories (id, created_at, updated_at, category_code, category_name)
+values (1, current_timestamp, current_timestamp, '24056', 'chess-figures');
+
+
 insert into categories (created_at, update_at, category_code, category_name)
 values
     (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'ELEC', 'Electronic'),
@@ -81,3 +88,8 @@ join orders o on oi.order_id = o.id
 join users u on o.customer_id = u.id
 where o.id = 1
   and u.id = 1;
+
+
+select * from users;
+select * from orders;
+select * from order_item;

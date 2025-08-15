@@ -4,6 +4,7 @@ create table categories (
 	updated_at timestamp(6) not null,
 	category_code VARCHAR(100) not null UNIQUE,
 	category_name VARCHAR(255) not null UNIQUE,
+
 	PRIMARY key (id)
 );
 
@@ -16,6 +17,7 @@ create table items (
 	created_at TIMESTAMP(5) not null,
 	fileUrl VARCHAR(255),
 	name varchar(255) not null UNIQUE,
+
 	PRIMARY KEY (id)
 );
 
@@ -25,6 +27,7 @@ create table order_item (
 	id bigserial not null,
 	item_id BIGINT not null,
 	order_id bigint not null,
+
 	PRIMARY KEY (id)
 );
 
@@ -33,6 +36,8 @@ create table orders (
 	customer_id bigint,
 	id bigserial not null,
 	updated_at timestamp(6) not null,
+	is_active boolean not null default true,
+
 	PRIMARY KEY (id)
 );
 
@@ -43,18 +48,21 @@ create table users (
 	name VARCHAR(50) not null UNIQUE,
 	email VARCHAR(255) not null UNIQUE,
 	password VARCHAR(255) not null,
+
 	PRIMARY KEY (id)
 );
 
 create table roles (
 	id bigserial not null,
 	name VARCHAR(255) not null UNIQUE,
+
 	PRIMARY key (id)
 );
 
 create table user_roles (
 	user_id BIGINT not null,
 	role_id bigint not null,
+
 	PRIMARY key (user_id, role_id)
 );
 

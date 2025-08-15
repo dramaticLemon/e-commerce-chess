@@ -1,3 +1,5 @@
+<!-- карточки товаров магазина -->
+
 <style>
   .product-list {
     display: flex;
@@ -68,9 +70,15 @@
       <img th:src="@{'/app/images/' + ${item.fileUrl}}" alt="Item image" />
       <p class="product-name" th:text="${item.name}">Item Name</p>
       <p class="product-price" th:text="${item.price}">Price</p>
+     <form th:action="@{/app/cart/add}" method="post">
 
-      <form action="@{/app/cart/add}" method="post">
-        <input type="hidden" name="itemId" th:value="${item.id}" />
+        <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
+
+        <input type="hidden" name="id" th:value="${item.id}" />
+        <input type="hidden" name="name" th:value="${item.name}" />
+        <input type="hidden" name="price" th:value="${item.price}" />
+        
+
         <button type="submit" class="buy-button">Buy</button>
       </form>
     </li>
